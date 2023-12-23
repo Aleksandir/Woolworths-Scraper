@@ -26,19 +26,13 @@ class Product:
 
 def main():
     delay = 3
-    # product = "soup"
-
-    # product.replace(" ", "%20")
-
-    # url = f"https://www.woolworths.com.au/shop/search/products?searchTerm={product}&pageNumber=1&sortBy=CUPAsc"
-
-    url = "https://www.woolworths.com.au/shop/search/products?searchTerm=chicken%20noodle%20soup&pageNumber=1&sortBy=CUPAsc"
+    product = "milk"
 
     # Create a new instance of the Firefox driver
     driver = webdriver.Firefox(options=options)
 
     # Go to a webpage
-    driver.get(url)
+    driver.get(geturl(product))
 
     page_contents = BeautifulSoup(driver.page_source, "html.parser")
 
@@ -129,20 +123,16 @@ def main():
         productLink = ""
 
     print(
-        name
-        + " / "
-        + itemprice
-        + " / "
-        + unitprice
-        + " / "
-        + specialtext
-        + " / "
-        + promotext
-        + " / "
-        + price_was_struckout
+        f"{name} / {itemprice} each / {unitprice} / {specialtext} / {promotext} / {price_was_struckout}"
     )
 
     driver.quit()
+
+
+def geturl(product):
+    product.replace(" ", "%20")
+    url = f"https://www.woolworths.com.au/shop/search/products?searchTerm={product}&pageNumber=1&sortBy=CUPAsc"
+    return url
 
 
 main()
